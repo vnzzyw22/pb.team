@@ -66,6 +66,19 @@ export const mensagens = {
       .join("\n");
   },
 
+  /** Empresa → clube, a partir de "Sua marca dentro da Arena PB Team". */
+  anuncie(p: { empresa: string; responsavel?: string; formato?: string }): string {
+    return [
+      `Olá, Pietro! Tenho interesse em anunciar na ${CLUBE.arena.nome}.`,
+      ``,
+      `Empresa: ${p.empresa}`,
+      p.responsavel ? `Responsável: ${p.responsavel}` : null,
+      p.formato ? `Formato de interesse: ${p.formato}` : null,
+    ]
+      .filter((l) => l !== null)
+      .join("\n");
+  },
+
   /** Cliente → clube, logo após pedir a reserva no site (envia o comprovante). */
   pedidoDeReserva(r: Reserva): string {
     return [

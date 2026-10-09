@@ -3,6 +3,7 @@ export * from "./tempo";
 export * from "./dados/clube";
 export * from "./dados/categorias";
 export * from "./dados/arena";
+export * from "./dados/galeria";
 export * from "./modelos";
 export * from "./categorias";
 export * from "./precos";

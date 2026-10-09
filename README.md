@@ -12,7 +12,8 @@ Stack: **Next.js 15 (App Router) + TypeScript + Tailwind 4**, com testes em **Vi
 
 | Parte | Situação |
 |---|---|
-| Regra de negócio (`src/lib`) | ✅ Pronta e testada (41 testes) |
+| Regra de negócio (`src/lib`) | ✅ Pronta e testada (48 testes) |
+| Conteúdo (títulos, técnico, fotos, vídeo) | ✅ Catalogado em `src/lib/dados` e `public/` |
 | Interface (páginas, componentes, visual) | ⏳ A fazer |
 | Banco de dados | ⏳ A fazer. Hoje existe só o repositório em memória. |
 | Rotas de API / Server Actions | ⏳ A fazer, junto com o banco |
@@ -71,9 +72,11 @@ Tudo o que está marcado com `CONFIRMAR` no código:
 - **Locação.** Expediente, preços (os atuais são **fictícios**), percentual do sinal, prazo e política de cancelamento.
 - **Churrasqueira.** Se existe, o que inclui e o preço.
 - **Pix.** Chave, nome do recebedor e cidade. Sem a chave, o site não gera o Pix.
-- **Contato.** O WhatsApp usado é o da bio do Instagram (5544999448422). Falta confirmar se ele serve também para a locação.
+- **Contato.** O WhatsApp do Pietro (44 99944-8422), da bio e dos posts. Falta confirmar se serve também para a locação.
+- **Títulos.** Categoria do Paranaense de Base 2022; ano e categoria da Copa Ingá, da Copa MBB, da Taça Brasil e da Super Copa América; resultados da Londrina Cup, da Copa Colégio Paraná e da "Copa do Mundo".
+- **Uso de imagem** das fotos com atletas menores de idade.
 - **Endereço e Google Maps** da Arena.
-- **Patrocinadores e logos.**
+- **Patrocinadores e logos.** Thermotech, LV Esportes e Guaiapó aparecem numa arte de torneio: confirmar o vínculo.
 
 ## Próximos passos
 

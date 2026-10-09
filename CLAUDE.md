@@ -36,15 +36,21 @@ Tirada do escudo, do uniforme e das artes do Instagram @pbteamfutsal:
 
 ## Páginas previstas
 
-1. **Home:** chamada "Formando atletas em Maringá desde 2019", faixa de conquistas e CTAs "Agende uma aula experimental" / "Reserve a Arena".
+1. **Home:** vídeo vertical em loop como fundo no celular (`VIDEOS` → `hero-jogo`, sem áudio, com pôster), chamada "Formando atletas em Maringá desde 2019", faixa de conquistas (`CLUBE.conquistas`), selo "Matrículas abertas" (`CLUBE.matriculas`) e CTAs "Agende uma aula experimental" / "Reserve a Arena".
 2. **Escolinha:** busca por ano de nascimento (`categoriaPorAnoNascimento`), cards de categoria com turmas (`resumoHorarios`) e formulário de aula experimental (`registrarAulaExperimental`).
-3. **O projeto:** história e filosofia de base do Pietro Bettin (`CLUBE.historia`, `CLUBE.missao`).
-4. **Conquistas:** `CLUBE.conquistas`.
+3. **O projeto:** história e filosofia de base (`CLUBE.historia`, `CLUBE.missao`, `CLUBE.citacao`) e o técnico **Pietro Bettin**, fundador, cujas iniciais dão nome ao time (`CLUBE.tecnico`, com fotos em `CLUBE.tecnico.fotos`).
+4. **Conquistas:** resumo em números (`CLUBE.conquistas`) + linha do tempo (`CLUBE.historico`, com `fotoId` quando houver).
 5. **Arena:** fluxo de reserva (`disponibilidade` → `solicitar` → Pix + WhatsApp), com a opção do combo churrasqueira.
-6. **Patrocinadores:** `CLUBE.patrocinadores` + "Seja patrocinador".
+6. **Patrocinadores:** `CLUBE.patrocinadores` (exibir só `confirmado: true`) + "Sua marca dentro da Arena PB Team" (`CLUBE.anuncie`, botão com `mensagens.anuncie`).
 7. **Painel (privado):** grade do dia (`grade`), confirmar sinal, cancelar, mensalistas, bloqueios, contatos e resumo.
+
+## Fotos e vídeo
+
+- Catálogo em `src/lib/dados/galeria.ts` (`FOTOS`, `VIDEOS`, `fotoPorId`, `fotosPorTipo`). Cada foto traz dimensões, `alt`, `foco` (object-position) e `usoSugerido`.
+- Use `next/image` com `width`/`height` do catálogo. Ao adicionar foto: converter para WebP (máx. 1920px) em `public/fotos/` e registrar no catálogo. O teste `conteudo.test.ts` confere arquivo e dimensões.
 
 ## Cuidados
 
-- Fotos de atletas são de **menores de idade**. Use só imagens fornecidas pelo clube, com autorização.
+- Muitas fotos têm atletas **menores de idade** (`temMenores`). Use só imagens do clube e confirme a autorização de uso de imagem antes de publicar.
 - Não use fotos do Google Maps nem de terceiros no site final.
+- Itens com `CONFIRMAR`/`confirmar` não devem aparecer como fato no site sem validação (ex.: categoria de um título).
