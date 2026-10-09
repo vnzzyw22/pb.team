@@ -38,7 +38,7 @@ Tirada do escudo, do uniforme e das artes do Instagram @pbteamfutsal:
 
 1. **Home:** vídeo vertical em loop como fundo no celular (`VIDEOS` → `hero-jogo`, sem áudio, com pôster), chamada "Formando atletas em Maringá desde 2019", faixa de conquistas (`CLUBE.conquistas`), selo "Matrículas abertas" (`CLUBE.matriculas`) e CTAs "Agende uma aula experimental" / "Reserve a Arena".
 2. **Escolinha:** busca por ano de nascimento (`categoriaPorAnoNascimento`), cards de categoria com turmas (`resumoHorarios`) e formulário de aula experimental (`registrarAulaExperimental`).
-3. **O projeto:** história e filosofia de base (`CLUBE.historia`, `CLUBE.missao`, `CLUBE.citacao`) e o técnico **Pietro Bettin**, fundador, cujas iniciais dão nome ao time (`CLUBE.tecnico`, com fotos em `CLUBE.tecnico.fotos`).
+3. **O projeto:** história e filosofia de base (`CLUBE.historia`, `CLUBE.missao`, `CLUBE.citacao`) e o técnico **Pietro Bettin**, fundador, cujas iniciais dão nome ao time (`CLUBE.tecnico`: `sobre`, `formacao` com UEM, pós e licenças CBFS C e B, `fotos`, `instagram`). A formação é argumento de confiança para os pais e merece destaque visual.
 4. **Conquistas:** resumo em números (`CLUBE.conquistas`) + linha do tempo (`CLUBE.historico`, com `fotoId` quando houver).
 5. **Arena:** fluxo de reserva (`disponibilidade` → `solicitar` → Pix + WhatsApp), com a opção do combo churrasqueira.
 6. **Patrocinadores:** `CLUBE.patrocinadores` (exibir só `confirmado: true`) + "Sua marca dentro da Arena PB Team" (`CLUBE.anuncie`, botão com `mensagens.anuncie`).

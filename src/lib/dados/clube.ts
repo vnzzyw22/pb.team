@@ -51,13 +51,22 @@ export const CLUBE = {
 
   tecnico: {
     nome: "Pietro Bettin",
-    papel: "Fundador e técnico",
+    papel: "Fundador, proprietário e técnico",
     /** O nome do time vem das iniciais dele. */
     sobre:
-      "Professor que dá nome à escolinha, Pietro Bettin comanda o PB Team desde a fundação, " +
-      "em 2019, e conduziu as equipes a títulos estaduais e a fases finais do Sul-Brasileiro.",
+      "Professor que dá nome à escolinha, Pietro Bettin é formado em Educação Física pela UEM, " +
+      "pós-graduado em futsal e treinamento desportivo e tem as licenças C e B da CBFS. " +
+      "Comanda o PB Team desde a fundação, em 2019, e conduziu as equipes a títulos estaduais " +
+      "e a fases finais do Sul-Brasileiro.",
+    /** Bio do Instagram @pietro_bettin. */
+    formacao: [
+      "Graduado em Educação Física pela UEM",
+      "Pós-graduado em Futsal e Treinamento Desportivo",
+      "Licenças C e B da CBFS",
+    ],
     fotos: ["pietro-bettin-trofeu-paranaense-2022", "pietro-bettin-banco"],
     whatsapp: WHATSAPP_PIETRO,
+    instagram: "pietro_bettin",
   },
 
   /** Objetivo declarado pelo técnico em entrevista. */
