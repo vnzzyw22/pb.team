@@ -62,3 +62,77 @@ describe("conteúdo do clube", () => {
     expect(m).not.toContain("Responsável");
   });
 });
+
+describe("conteúdo publicável", () => {
+  it("histórico público omite campos pendentes", async () => {
+    const { historicoPublico } = await import("..");
+    const pub = historicoPublico();
+    const paranaense2025 = pub.find((r) => r.competicao === "Campeonato Paranaense de Futsal")!;
+    expect(paranaense2025.ano).toBeUndefined(); // ano pendente
+    expect(paranaense2025.categoria).toBe("Sub-9");
+    const ingá = pub.find((r) => r.competicao === "Copa Ingá de Futsal")!;
+    expect(ingá).toMatchObject({ categoria: "Sub-9 Federados", colocacao: "Campeão" });
+    expect(ingá.ano).toBeUndefined();
+    expect(pub.find((r) => r.ano === 2024)).toMatchObject({ categoria: "Sub-10 masculino", fotoId: "paranaense-2024-sub10-8-lugar" });
+    for (const r of pub) expect(r).not.toHaveProperty("confirmar");
+  });
+
+  it("resultado com colocação pendente fica de fora", async () => {
+    const { historicoPublico } = await import("..");
+    const pub = historicoPublico([
+      { competicao: "Copa X", colocacao: "Campeão", titulo: true, confirmar: ["colocacao"] },
+      { competicao: "Copa Y", colocacao: "Vice", titulo: true, ano: 2023 },
+    ]);
+    expect(pub.map((r) => r.competicao)).toEqual(["Copa Y"]);
+  });
+
+  it("Super Copa América é título tanto no resumo quanto no histórico", async () => {
+    const { historicoPublico } = await import("..");
+    expect(CLUBE.conquistas.some((c) => c.titulo.startsWith("Super Copa América"))).toBe(true);
+    expect(historicoPublico().find((r) => r.competicao.startsWith("Super Copa América"))).toMatchObject({ colocacao: "Campeão", titulo: true });
+  });
+
+  it("torneios, patrocinadores e lista de pendências", async () => {
+    const { torneiosPublicos, patrocinadoresPublicos, pendenciasDeConteudo } = await import("..");
+    expect(torneiosPublicos()).not.toContain("Copa do Mundo");
+    expect(patrocinadoresPublicos().every((p) => p.confirmado)).toBe(true);
+    const pendencias = pendenciasDeConteudo();
+    expect(pendencias).toContain("Copa MBB (Francisco Beltrão): ano e categoria");
+    expect(pendencias.some((p) => p.includes("Thermotech"))).toBe(true);
+  });
+});
+
+describe("mensagens", () => {
+  it("aula experimental sem 'nascido em' (vale para meninos e meninas)", () => {
+    const m = mensagens.aulaExperimental({ responsavel: "Maria", atleta: "Helena", anoNascimento: 2019 });
+    expect(m).not.toMatch(/nascid/);
+    expect(m).toContain("Ano de nascimento: 2019");
+  });
+
+  it("interesse na Arena, com e sem detalhes", () => {
+    expect(mensagens.interesseArena()).toBe("Olá! Quero saber sobre a locação da Arena PB Team.");
+    const m = mensagens.interesseArena({ nome: "Carlos", data: "2026-10-16", periodo: "noite", comChurrasqueira: true });
+    expect(m).toContain("Data desejada: Sexta-feira, 16/10/2026");
+    expect(m).toContain("Período: noite");
+    expect(m).toContain("Com churrasqueira");
+  });
+});
+
+describe("validação da aula experimental sem banco", () => {
+  it("normaliza, encontra a categoria e gera o WhatsApp sem gravar nada", async () => {
+    const { validarAulaExperimental } = await import("..");
+    const v = validarAulaExperimental(
+      { responsavel: "  Maria   Souza ", telefone: "(44) 98888-7777", atleta: "Pedro", anoNascimento: 2017, turmaId: "sub9" },
+      { temporada: 2026 },
+    );
+    if (!v.ok) throw new Error(v.erros.join());
+    expect(v.dados).toMatchObject({ responsavel: "Maria Souza", telefone: "5544988887777", categoriaNome: "Sub-9", turmaNome: "Turma única" });
+    expect(v.whatsapp).toContain("wa.me/5544999448422");
+  });
+
+  it("aponta todos os erros de uma vez", async () => {
+    const { validarAulaExperimental } = await import("..");
+    const v = validarAulaExperimental({ responsavel: "M", telefone: "123", atleta: "", anoNascimento: 2025 }, { temporada: 2026 });
+    expect(v.ok || v.erros).toEqual(["responsavel_invalido", "atleta_invalido", "telefone_invalido", "fora_das_categorias"]);
+  });
+});

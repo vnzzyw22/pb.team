@@ -14,6 +14,9 @@ export interface Conquista {
   detalhe?: string;
 }
 
+/** Campos de um resultado que ainda dependem de confirmação do clube. */
+export type CampoAConfirmar = "ano" | "categoria" | "colocacao";
+
 /** Um resultado específico, para a linha do tempo de conquistas. */
 export interface Resultado {
   ano?: number;
@@ -25,8 +28,18 @@ export interface Resultado {
   titulo: boolean;
   /** id em FOTOS (dados/galeria.ts) */
   fotoId?: string;
-  /** O que falta confirmar com o clube. */
-  confirmar?: string;
+  /**
+   * Campos que faltam ou estão incertos. No site, use `historicoPublico()`:
+   * campos pendentes são omitidos e, se a colocação for pendente, o resultado
+   * inteiro fica de fora.
+   */
+  confirmar?: CampoAConfirmar[];
+}
+
+export interface Torneio {
+  nome: string;
+  /** false = nome incompleto ou incerto; não exibir. */
+  confirmado: boolean;
 }
 
 export interface Patrocinador {
@@ -130,6 +143,8 @@ export const CLUBE = {
       categoria: "Sub-9",
       colocacao: "Fase final: entre as 8 melhores equipes do Paraná",
       titulo: false,
+      // o ano vem do destaque "Paranaense Futsal 2025"; a arte não traz o ano
+      confirmar: ["ano"],
     },
     {
       ano: 2024,
@@ -145,38 +160,45 @@ export const CLUBE = {
       colocacao: "Campeão",
       titulo: true,
       fotoId: "pietro-bettin-trofeu-paranaense-2022",
-      confirmar: "categoria",
+      confirmar: ["categoria"],
     },
     {
       competicao: "Copa Ingá de Futsal",
       categoria: "Sub-9 Federados",
       colocacao: "Campeão",
       titulo: true,
-      confirmar: "ano",
+      confirmar: ["ano"],
     },
     {
       competicao: "Copa MBB (Francisco Beltrão)",
       colocacao: "Campeão",
       titulo: true,
-      confirmar: "ano e categoria",
+      confirmar: ["ano", "categoria"],
     },
     {
       competicao: "Taça Brasil de Clubes",
       colocacao: "3º lugar",
       titulo: true,
-      confirmar: "ano e categoria",
+      confirmar: ["ano", "categoria"],
     },
     {
+      // A bio do Instagram lista a "SUPER COPA América BC" entre os títulos (🏆),
+      // então o histórico segue o próprio clube: campeão.
       competicao: "Super Copa América (Balneário Camboriú)",
       colocacao: "Campeão",
       titulo: true,
-      confirmar: "ano, categoria e se foi título",
+      confirmar: ["ano", "categoria"],
     },
   ] satisfies Resultado[],
 
   /** Torneios que aparecem nos destaques do Instagram, sem resultado identificado. */
-  // CONFIRMAR resultados para incluir no histórico.
-  torneiosDisputados: ["Sul-Brasileiro de Futsal", "Londrina Cup", "Copa Colégio Paraná", "Copa do Mundo (nome completo a confirmar)"],
+  torneiosDisputados: [
+    { nome: "Sul-Brasileiro de Futsal", confirmado: true },
+    { nome: "Londrina Cup", confirmado: true },
+    { nome: "Copa Colégio Paraná", confirmado: true },
+    // destaque "Copa mundo…" cortado no Instagram: falta o nome completo
+    { nome: "Copa do Mundo", confirmado: false },
+  ] satisfies Torneio[],
 
   patrocinadores: [
     { nome: "VS Viagens", onde: "Camisa de jogo e banner na Arena", confirmado: true },

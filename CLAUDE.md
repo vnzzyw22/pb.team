@@ -66,11 +66,11 @@ Tirada do escudo, do uniforme e das artes do Instagram @pbteamfutsal:
 ## Páginas previstas
 
 1. **Home:** vídeo vertical em loop como fundo no celular (`VIDEOS` → `hero-jogo`, sem áudio, com pôster), chamada "Formando atletas em Maringá desde 2019", faixa de conquistas (`CLUBE.conquistas`), selo "Matrículas abertas" (`CLUBE.matriculas`) e CTAs "Agende uma aula experimental" / "Reserve a Arena".
-2. **Escolinha:** busca por ano de nascimento (`categoriaPorAnoNascimento`), cards de categoria com turmas (`resumoHorarios`) e formulário de aula experimental (`registrarAulaExperimental`).
+2. **Escolinha:** busca por ano de nascimento (`categoriaPorAnoNascimento`), cards de categoria com turmas (`resumoHorarios`) e formulário de aula experimental: valide no navegador com **`validarAulaExperimental()`** (erros por campo + link do WhatsApp, sem banco) e envie com a action `pedirAulaExperimental`.
 3. **O projeto:** história e filosofia de base (`CLUBE.historia`, `CLUBE.missao`, `CLUBE.citacao`) e o técnico **Pietro Bettin**, fundador, cujas iniciais dão nome ao time (`CLUBE.tecnico`: `sobre`, `formacao` com UEM, pós e licenças CBFS C e B, `fotos`, `instagram`). A formação é argumento de confiança para os pais e merece destaque visual.
-4. **Conquistas:** resumo em números (`CLUBE.conquistas`) + linha do tempo (`CLUBE.historico`, com `fotoId` quando houver).
-5. **Arena:** fluxo de reserva (`disponibilidade` → `solicitar` → Pix + WhatsApp), com a opção do combo churrasqueira.
-6. **Patrocinadores:** `CLUBE.patrocinadores` (exibir só `confirmado: true`) + "Sua marca dentro da Arena PB Team" (`CLUBE.anuncie`, botão com `mensagens.anuncie`).
+4. **Conquistas:** resumo em números (`CLUBE.conquistas`) + linha do tempo com **`historicoPublico()`** (já omite ano/categoria pendentes) e `torneiosPublicos()`.
+5. **Arena:** fluxo de reserva (`buscarHorarios` → `pedirReserva` → Pix + WhatsApp), com a opção do combo churrasqueira. Para dúvidas gerais sobre locação, use `linkWhatsApp(mensagens.interesseArena({...}))`.
+6. **Patrocinadores:** **`patrocinadoresPublicos()`** (só os confirmados) + "Sua marca dentro da Arena PB Team" (`CLUBE.anuncie`, botão com `mensagens.anuncie`).
 7. **Painel (privado):** grade do dia (`grade`), confirmar sinal, cancelar, mensalistas, bloqueios, contatos e resumo.
 
 ## Fotos e vídeo
@@ -82,4 +82,4 @@ Tirada do escudo, do uniforme e das artes do Instagram @pbteamfutsal:
 
 - Muitas fotos têm atletas **menores de idade** (`temMenores`). Use só imagens do clube e confirme a autorização de uso de imagem antes de publicar.
 - Não use fotos do Google Maps nem de terceiros no site final.
-- Itens com `CONFIRMAR`/`confirmar` não devem aparecer como fato no site sem validação (ex.: categoria de um título).
+- Itens pendentes não aparecem como fato: use `historicoPublico()`, `torneiosPublicos()` e `patrocinadoresPublicos()`. `pendenciasDeConteudo()` lista o que perguntar ao clube.

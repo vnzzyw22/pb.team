@@ -2,7 +2,7 @@ import { RECURSOS } from "./dados/arena";
 import { CLUBE } from "./dados/clube";
 import type { Reserva } from "./modelos";
 import { formatarMoeda } from "./precos";
-import { diaDaSemana, formatarData, formatarHora, NOMES_DIAS } from "./tempo";
+import { diaDaSemana, formatarData, formatarHora, NOMES_DIAS, type DataISO } from "./tempo";
 
 /**
  * Normaliza um telefone brasileiro para o formato do wa.me (55 + DDD + número).
@@ -59,8 +59,29 @@ export const mensagens = {
       `Olá! Gostaria de agendar uma aula experimental no ${CLUBE.nome}.`,
       ``,
       `Responsável: ${p.responsavel}`,
-      `Atleta: ${p.atleta} (nascido em ${p.anoNascimento})`,
+      `Atleta: ${p.atleta}`,
+      `Ano de nascimento: ${p.anoNascimento}`,
       p.categoria ? `Categoria: ${p.categoria}${p.turma ? ` · ${p.turma}` : ""}` : null,
+    ]
+      .filter((l) => l !== null)
+      .join("\n");
+  },
+
+  /**
+   * Interessado → clube, para dúvidas gerais sobre a locação da Arena
+   * (botões "Fale sobre a locação", página provisória etc.).
+   */
+  interesseArena(
+    p: { nome?: string; data?: DataISO; periodo?: string; comChurrasqueira?: boolean; evento?: string } = {},
+  ): string {
+    return [
+      `Olá! Quero saber sobre a locação da ${CLUBE.arena.nome}.`,
+      p.nome || p.data || p.periodo || p.comChurrasqueira || p.evento ? `` : null,
+      p.nome ? `Nome: ${p.nome}` : null,
+      p.data ? `Data desejada: ${NOMES_DIAS[diaDaSemana(p.data)]}, ${formatarData(p.data)}` : null,
+      p.periodo ? `Período: ${p.periodo}` : null,
+      p.evento ? `Ocasião: ${p.evento}` : null,
+      p.comChurrasqueira ? `Com churrasqueira` : null,
     ]
       .filter((l) => l !== null)
       .join("\n");

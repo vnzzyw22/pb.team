@@ -10,6 +10,7 @@ export * from "./precos";
 export * from "./agenda";
 export * from "./reservas";
 export * from "./leads";
+export * from "./conteudo";
 export * from "./ocupacao";
 export * from "./pix";
 export * from "./whatsapp";
