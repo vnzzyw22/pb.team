@@ -30,6 +30,17 @@ export interface Repositorio {
   salvarLead(l: Lead): Promise<void>;
 }
 
+/**
+ * Lançado por `salvarReserva` quando o banco recusa a gravação porque o
+ * horário já está ocupado (corrida entre dois servidores).
+ */
+export class ConflitoDeHorario extends Error {
+  constructor() {
+    super("Horário já ocupado");
+    this.name = "ConflitoDeHorario";
+  }
+}
+
 const copia = <T>(v: T): T => structuredClone(v);
 
 export class RepositorioMemoria implements Repositorio {

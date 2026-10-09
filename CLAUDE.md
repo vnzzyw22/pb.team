@@ -8,6 +8,7 @@ Conteúdo, textos e comentários em **português do Brasil**.
 - `npm run dev`: servidor local
 - `npm test`: testes (Vitest) da regra de negócio
 - `npm run typecheck` / `npm run lint`
+- `npm run db:preparar` / `npm run db:demo`: cria as tabelas / recarrega os dados de exemplo no banco de `DATABASE_URL`
 
 Rode `npm test && npm run typecheck && npm run lint` antes de cada commit.
 
@@ -18,8 +19,36 @@ Rode `npm test && npm run typecheck && npm run lint` antes de cada commit.
   - Dados editáveis (horários, preços, textos, conquistas) ficam em `src/lib/dados/`. Não espalhe esses valores por componentes.
   - Dinheiro sempre em **centavos** (`number`); exiba com `formatarMoeda`.
   - Datas são strings `"AAAA-MM-DD"` e horários são minutos do dia; use `formatarData`, `formatarHora` e `formatarHoraCurta`.
-  - Persistência via interface `Repositorio`. Hoje só existe `RepositorioMemoria`; o banco de verdade ainda será implementado.
-- `src/app/`: páginas (App Router) e, futuramente, Server Actions/rotas que chamam `ServicoReservas`.
+- `src/server/`: código só de servidor.
+  - `contexto.ts`: `obterContexto()` devolve repositório + `ServicoReservas`. Com `DATABASE_URL` usa o Postgres (Neon); sem ela, usa memória com dados de exemplo (dá para desenvolver a interface sem configurar nada).
+  - `db/`: estrutura das tabelas (`schema.ts`) e `RepositorioPostgres`. Uma exclusion constraint impede, no banco, horários sobrepostos.
+  - `demo.ts`: dados de exemplo da demonstração.
+  - `acoes/publico.ts` e `acoes/painel.ts`: **Server Actions que a interface chama** (ver abaixo).
+  - `painel/acesso.ts`: `protegerPagina()` e `estaNoPainel()` para as páginas privadas.
+- `src/app/`: páginas (App Router). `src/app/api/cron` roda as tarefas diárias.
+
+### Server Actions para a interface
+
+Podem ser chamadas direto de componentes cliente (`"use client"`), como funções assíncronas.
+
+Site público (`@/server/acoes/publico`):
+- `buscarHorarios(recursoId, data, duracao)` → horários livres com preço
+- `pedirReserva(entrada)` → `{ ok, reserva, pixCopiaECola?, whatsapp }` ou `{ ok: false, erros }`
+- `pedirAulaExperimental(entrada)` → `{ ok, lead, whatsapp }` ou `{ ok: false, erros }`
+- `consultarReserva(codigo)` → situação da reserva pelo código (ex.: `PB-7K3Q`)
+
+Painel (`@/server/acoes/painel`), todas respondem `{ ok: true, dados } | { ok: false, erro, mensagem }` e exigem login:
+- Sessão: `entrarNoPainel(senha)`, `sairDoPainel()`, `infoDoSistema()`
+- Agenda: `agendaDoDia(data)`, `reservasDoPeriodo(de, ate)`, `pendentesDeSinal()`
+- Reservas: `lancarReserva`, `confirmarSinal`, `registrarPagamento`, `cancelarReserva`, `marcarComparecimento`, `linkDeLembrete`
+- Bloqueios: `bloquearHorario`, `desbloquearHorario`, `listarBloqueios`
+- Mensalistas: `listarMensalistas`, `criarMensalista`, `encerrarMensalista`
+- Contatos: `listarContatos`, `mudarStatusContato`
+- Relatórios: `resumoDoPeriodo(de, ate)`, `ocupacaoDaSemana()`
+- Demo: `resetarDemo()`
+
+Páginas do painel: no topo do Server Component, `await protegerPagina()` (redireciona para `/painel/entrar`).
+Mensagens de erro: mapeie os códigos (`conflito`, `antecedencia_minima`, `telefone_invalido`…) para textos amigáveis em português.
 
 Ao mudar regra em `src/lib`, adicione ou ajuste testes em `src/lib/__tests__/`.
 

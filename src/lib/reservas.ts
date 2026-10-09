@@ -3,7 +3,7 @@ import { PIX, POLITICA, RECURSOS, type RecursoId } from "./dados/arena";
 import { ocupaHorario, type Bloqueio, type Cliente, type Reserva, type Serie } from "./modelos";
 import { gerarPixCopiaECola } from "./pix";
 import { calcularSinal, orcar, type ItemReserva, type Orcamento } from "./precos";
-import type { Repositorio } from "./repositorio";
+import { ConflitoDeHorario, type Repositorio } from "./repositorio";
 import {
   agoraEmMaringa,
   diaDaSemana,
@@ -124,6 +124,28 @@ export class ServicoReservas {
     }
   }
 
+  /** Marca como expiradas as pré-reservas vencidas (sem passar pela fila). */
+  private async expirarVencidas(agora: Agora): Promise<number> {
+    const vencidas = await this.repo.pendentesVencidas(agora.instante);
+    for (const r of vencidas) {
+      r.status = "expirada";
+      r.atualizadaEm = agora.instante;
+      await this.repo.salvarReserva(r);
+    }
+    return vencidas.length;
+  }
+
+  /** Grava; devolve false se o banco recusou por choque de horário. */
+  private async gravar(r: Reserva): Promise<boolean> {
+    try {
+      await this.repo.salvarReserva(r);
+      return true;
+    } catch (e) {
+      if (e instanceof ConflitoDeHorario) return false;
+      throw e;
+    }
+  }
+
   private async buscar(id: string): Promise<Reserva> {
     const r = await this.repo.reservaPorId(id);
     if (!r) throw new ErroReserva("nao_encontrada", "Reserva não encontrada");
@@ -176,6 +198,7 @@ export class ServicoReservas {
       if (erros.length || !itens || !cliente) return { ok: false, erros, conflitos: [] };
 
       const agora = this.agora();
+      await this.expirarVencidas(agora);
       const ctx = await this.contexto(e.data, agora);
       const conflitos: Ocupacao[] = [];
       for (const item of itens) {
@@ -203,7 +226,7 @@ export class ServicoReservas {
         atualizadaEm: agora.instante,
         expiraEm: agora.instante + POLITICA.prazoSinalMin * 60_000,
       };
-      await this.repo.salvarReserva(reserva);
+      if (!(await this.gravar(reserva))) return { ok: false, erros: ["conflito"], conflitos: [] };
 
       return {
         ok: true,
@@ -223,6 +246,7 @@ export class ServicoReservas {
       if (erros.length || !itens || !cliente) return { ok: false, erros, conflitos: [] };
 
       const agora = this.agora();
+      await this.expirarVencidas(agora);
       const ctx = await this.contexto(e.data, agora);
       const validacoes = itens.map((i) => validarHorario(i.recursoId, i.intervalo, ctx, { peloPainel: true }));
       const errosHorario = [...new Set(validacoes.flatMap((v) => v.erros))];
@@ -244,7 +268,7 @@ export class ServicoReservas {
         criadaEm: agora.instante,
         atualizadaEm: agora.instante,
       };
-      await this.repo.salvarReserva(reserva);
+      if (!(await this.gravar(reserva))) return { ok: false, erros: ["conflito"], conflitos: [] };
       return { ok: true, reserva, whatsapp: linkWhatsApp(mensagens.confirmacao(reserva), reserva.cliente.telefone) };
     });
   }
@@ -272,7 +296,9 @@ export class ServicoReservas {
       r.status = "confirmada";
       r.expiraEm = undefined;
       r.atualizadaEm = agora.instante;
-      await this.repo.salvarReserva(r);
+      if (!(await this.gravar(r))) {
+        throw new ErroReserva("horario_ocupado", "O horário foi ocupado depois que a pré-reserva expirou");
+      }
       return { reserva: r, whatsapp: linkWhatsApp(mensagens.confirmacao(r), r.cliente.telefone) };
     });
   }
@@ -324,16 +350,7 @@ export class ServicoReservas {
 
   /** Libera pré-reservas sem sinal. Rodar periodicamente (cron) ou antes de listar. */
   expirarPendentes(): Promise<number> {
-    return this.exclusivo(async () => {
-      const agora = this.agora();
-      const vencidas = await this.repo.pendentesVencidas(agora.instante);
-      for (const r of vencidas) {
-        r.status = "expirada";
-        r.atualizadaEm = agora.instante;
-        await this.repo.salvarReserva(r);
-      }
-      return vencidas.length;
-    });
+    return this.exclusivo(() => this.expirarVencidas(this.agora()));
   }
 
   // ---------------------------------------------------------------- bloqueios
@@ -445,6 +462,7 @@ export class ServicoReservas {
   /** Lança ocorrências faltantes (sem passar pela fila — chamado dentro dela). */
   private async lancarOcorrencias(s: Serie, ate: DataISO): Promise<{ criadas: Reserva[]; conflitos: DataISO[] }> {
     const agora = this.agora();
+    await this.expirarVencidas(agora);
     const limite = s.dataFim && s.dataFim < ate ? s.dataFim : ate;
     let data = s.dataInicio < agora.data ? agora.data : s.dataInicio;
     while (diaDaSemana(data) !== s.diaSemana) data = somarDias(data, 1);
@@ -488,8 +506,8 @@ export class ServicoReservas {
         criadaEm: agora.instante,
         atualizadaEm: agora.instante,
       };
-      await this.repo.salvarReserva(r);
-      criadas.push(r);
+      if (await this.gravar(r)) criadas.push(r);
+      else conflitos.push(data);
     }
     return { criadas, conflitos };
   }

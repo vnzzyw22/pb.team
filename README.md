@@ -12,12 +12,15 @@ Stack: **Next.js 15 (App Router) + TypeScript + Tailwind 4**, com testes em **Vi
 
 | Parte | Situação |
 |---|---|
-| Regra de negócio (`src/lib`) | ✅ Pronta e testada (48 testes) |
+| Regra de negócio (`src/lib`) | ✅ Pronta e testada |
 | Conteúdo (títulos, técnico, fotos, vídeo) | ✅ Catalogado em `src/lib/dados` e `public/` |
 | Interface (páginas, componentes, visual) | ⏳ A fazer |
-| Banco de dados | ⏳ A fazer. Hoje existe só o repositório em memória. |
-| Rotas de API / Server Actions | ⏳ A fazer, junto com o banco |
-| Login do painel | ⏳ A fazer |
+| Banco de dados (Postgres/Neon) | ✅ Pronto, com trava contra horários sobrepostos |
+| Server Actions (site e painel) | ✅ Prontas (`src/server/acoes`) |
+| Login do painel | ✅ Senha + cookie assinado |
+| Dados de exemplo da demo + "resetar demo" | ✅ Prontos |
+
+Testes: 73, cobrindo a regra de negócio, o Postgres (via PGlite), os dados da demo e a sessão do painel.
 
 ## Comandos
 
@@ -27,7 +30,23 @@ npm run dev        # site em http://localhost:3000
 npm test           # testes da regra de negócio
 npm run typecheck
 npm run lint
+npm run db:preparar  # cria as tabelas no banco de DATABASE_URL
+npm run db:demo      # apaga tudo e carrega os dados de exemplo
 ```
+
+Sem `DATABASE_URL`, o site roda com dados de exemplo **em memória**: dá para desenvolver a interface sem configurar nada. A senha do painel nesse modo é `pbteam2019`.
+
+## Banco de dados e demo (grátis)
+
+1. Crie uma conta em [neon.com](https://neon.com) e um projeto "pb-team" (região São Paulo, se houver).
+2. Copie a connection string **pooled** (Dashboard → Connect).
+3. Na Vercel (ou em `.env.local`), configure as variáveis de `.env.example`:
+   - `DATABASE_URL`: a connection string
+   - `DEMO=true`: preenche o banco vazio com dados de exemplo e libera o botão "resetar demo"
+   - `PAINEL_SENHA`: senha do painel
+4. As tabelas são criadas sozinhas na primeira requisição. Ou rode `npm run db:demo`.
+
+A Vercel roda `/api/cron` uma vez por dia (`vercel.json`) para expirar pré-reservas e lançar as próximas semanas dos mensalistas.
 
 ## Estrutura da regra de negócio
 
@@ -78,10 +97,8 @@ Tudo o que está marcado com `CONFIRMAR` no código:
 - **Endereço e Google Maps** da Arena.
 - **Patrocinadores e logos.** Thermotech, LV Esportes e Guaiapó aparecem numa arte de torneio: confirmar o vínculo.
 
-## Próximos passos
+## Próximos passos (atualizado)
 
-1. **Interface:** páginas públicas (Home, Escolinha/Categorias, Conquistas, Arena/Reservas, Patrocinadores) e o painel.
-2. **Banco de dados:** implementar `Repositorio` com Postgres (Supabase ou Neon). Use uma *exclusion constraint* para garantir no banco que duas reservas nunca se sobreponham.
-3. **API:** Server Actions ou route handlers chamando `ServicoReservas`.
-4. **Login do painel** e **cron** (`expirarPendentes`, `estenderSeries`, lembretes da véspera).
-5. **Fase 3 (opcional):** pagamento automático (Mercado Pago/Asaas) e área dos pais.
+1. **Interface:** páginas públicas e telas da Arena e do Painel, usando as Server Actions (ver CLAUDE.md).
+2. **Deploy da demo:** Vercel + Neon (seção acima).
+3. **Depois da venda:** confirmar os dados marcados com `CONFIRMAR`, chave Pix real, lembretes automáticos e, se quiserem, pagamento automático (Mercado Pago/Asaas) e área dos pais.
