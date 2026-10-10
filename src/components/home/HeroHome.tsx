@@ -63,7 +63,7 @@ export function HeroHome() {
           </h1>
 
           <p className="surgir lead mt-5 hidden max-w-[34ch] text-giz lg:block" style={{ "--atraso": "0.4s" } as React.CSSProperties}>
-            Escolinha de futsal do {primeira} ao {ultima}, com o técnico {CLUBE.tecnico.nome}.
+            Escolinha de futsal do <span className="whitespace-nowrap">{primeira}</span> ao <span className="whitespace-nowrap">{ultima}</span>, com o técnico {CLUBE.tecnico.nome}.
           </p>
 
           {/* A jogada: desce sobre o vídeo até o botão */}
@@ -81,7 +81,7 @@ export function HeroHome() {
           </div>
 
           <p className="surgir mt-4 max-w-[36ch] text-[0.9375rem] text-white/85 lg:hidden" style={{ "--atraso": "0.4s" } as React.CSSProperties}>
-            Escolinha de futsal do {primeira} ao {ultima}, com o técnico {CLUBE.tecnico.nome}.
+            Escolinha de futsal do <span className="whitespace-nowrap">{primeira}</span> ao <span className="whitespace-nowrap">{ultima}</span>, com o técnico {CLUBE.tecnico.nome}.
           </p>
         </div>
       </div>

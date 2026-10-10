@@ -138,7 +138,7 @@
     font-size: clamp(3.5rem, 18vw, 6rem);
   }
   .t-1 {
-    font-size: clamp(3.25rem, 15vw, 6rem);
+    font-size: clamp(2.75rem, 13.5vw, 6rem);
   }
   .t-2 {
     font-size: clamp(2.5rem, 10.5vw, 4.5rem);

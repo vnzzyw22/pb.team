@@ -43,7 +43,7 @@ export default function Home() {
 
           <div className="px-4 pb-20 pt-10 sm:px-6 lg:col-span-7 lg:px-0 lg:py-4">
             <h2 id="titulo-escolinha" className="titulo t-2">
-              Do {primeira} ao {ultima}
+              Do {primeira} ao <span className="whitespace-nowrap">{ultima}</span>
             </h2>
             {CLUBE.matriculas.abertas && <p className="lead medida mt-5 text-giz">{CLUBE.matriculas.chamada}</p>}
 
