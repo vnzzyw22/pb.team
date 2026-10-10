@@ -3,9 +3,10 @@ import { CATEGORIAS, CLUBE, patrocinadoresPublicos, RECURSOS } from "@/lib";
 import { FaixaConquistas } from "@/components/conquistas/FaixaConquistas";
 import { faixaDeAnos, faixaDeCategorias } from "@/components/escolinha/formatos";
 import { FotoClube } from "@/components/FotoClube";
-import { LinhaDoMeio, MarcaX } from "@/components/grafismos";
+import { MarcaX } from "@/components/grafismos";
 import { HeroHome } from "@/components/home/HeroHome";
 import { Quadra } from "@/components/Quadra";
+import { ChamadaFinal } from "@/components/site/ChamadaFinal";
 import { ANCORA_AULA, ANCORA_RESERVA } from "@/components/site/navegacao";
 
 // As faixas de ano das categorias mudam com a temporada.
@@ -177,23 +178,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* Fechamento */}
-      <section aria-labelledby="titulo-fechamento" className="pb-24 lg:pb-32">
-        <div className="recipiente">
-          <LinhaDoMeio />
-          <div className="mt-16 max-w-3xl lg:mt-20">
-            <h2 id="titulo-fechamento" className="titulo t-1">
-              Traga seu filho para treinar
-            </h2>
-            <p className="lead medida mt-6 text-giz">
-              Você informa o ano de nascimento, a gente indica a turma e combina o dia da aula experimental pelo WhatsApp.
-            </p>
-            <Link href={ANCORA_AULA} className="btn btn-neon mt-9">
-              Agende uma aula experimental
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ChamadaFinal />
     </>
   );
 }
