@@ -11,14 +11,27 @@ import { whatsappDaArena, whatsappDoClube } from "./navegacao";
  */
 export function BotaoWhatsApp() {
   const pathname = usePathname();
-  const [visivel, setVisivel] = useState(false);
+  const [rolou, setRolou] = useState(false);
+  const [preenchendo, setPreenchendo] = useState(false);
 
   useEffect(() => {
-    const aoRolar = () => setVisivel(window.scrollY > window.innerHeight * 0.6);
+    const aoRolar = () => setRolou(window.scrollY > window.innerHeight * 0.6);
+    // Some enquanto a pessoa preenche um campo, para não cobrir o formulário.
+    const campo = (e: FocusEvent) => e.target instanceof HTMLElement && e.target.matches("input, select, textarea");
+    const entrou = (e: FocusEvent) => campo(e) && setPreenchendo(true);
+    const saiu = (e: FocusEvent) => campo(e) && setPreenchendo(false);
     aoRolar();
     window.addEventListener("scroll", aoRolar, { passive: true });
-    return () => window.removeEventListener("scroll", aoRolar);
+    document.addEventListener("focusin", entrou);
+    document.addEventListener("focusout", saiu);
+    return () => {
+      window.removeEventListener("scroll", aoRolar);
+      document.removeEventListener("focusin", entrou);
+      document.removeEventListener("focusout", saiu);
+    };
   }, []);
+
+  const visivel = rolou && !preenchendo;
 
   const naArena = pathname.startsWith("/arena");
 
