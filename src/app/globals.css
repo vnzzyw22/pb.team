@@ -137,8 +137,15 @@
     letter-spacing: 0.004em;
     word-spacing: 0.08em;
   }
+  /* Título da primeira tela: mesma família, mais leve e um pouco mais larga. */
+  .titulo-leve {
+    font-weight: 700;
+    font-variation-settings: "wdth" 68;
+    line-height: 0.94;
+    letter-spacing: 0.006em;
+  }
   .t-hero {
-    font-size: clamp(3.5rem, 18vw, 6rem);
+    font-size: clamp(2.4rem, 11vw, 4.5rem);
   }
   .t-1 {
     font-size: clamp(2.5rem, 12.5vw, 6rem);
@@ -368,6 +375,14 @@
   }
   .aviso-ok {
     border-color: rgb(143 216 168 / 0.5);
+  }
+
+  /* Desktop: a coluna de vídeo se dissolve no preto pela esquerda, sem moldura. */
+  @media (min-width: 1024px) {
+    .hero-video {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 42%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 42%);
+    }
   }
 
   /* Botão de pausar o vídeo de fundo (alvo de toque de 44px). */

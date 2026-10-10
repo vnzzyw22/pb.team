@@ -18,11 +18,11 @@ colors:
 typography:
   display:
     fontFamily: "Archivo, Arial Narrow, Arial, sans-serif"
-    fontSize: "clamp(3.5rem, 18vw, 6rem)"
-    fontWeight: 900
-    lineHeight: 0.88
-    letterSpacing: "0.004em"
-    fontVariation: "'wdth' 62"
+    fontSize: "clamp(2.4rem, 11vw, 4.5rem)"
+    fontWeight: 700
+    lineHeight: 0.94
+    letterSpacing: "0.006em"
+    fontVariation: "'wdth' 68"
   headline:
     fontFamily: "Archivo, Arial Narrow, Arial, sans-serif"
     fontSize: "clamp(2.5rem, 12.5vw, 6rem)"
@@ -215,7 +215,7 @@ Preto e branco de prancheta, um neon de marcador e dois tons de estado; o painel
 **Character:** Uma família só, esticada e espremida como letra de marcador numa prancheta: títulos condensados pesados em caixa alta, texto aberto e calmo, dados em meia largura com números alinhados.
 
 ### Hierarchy
-- **Display** (900, clamp 3.5–6rem, 0,88): só o título da Home, quebrado linha a linha no código.
+- **Display** (`.titulo .titulo-leve .t-hero`: peso 700, largura 68, clamp 2.4–4.5rem, 0,94): só o título da Home, em três linhas escolhidas no código. Mais leve e menor que os demais títulos por pedido do cliente: a primeira tela não pode ficar pesada nem esconder o vídeo.
 - **Headline** (900, clamp 2.5–6rem, 0,88): títulos de página e da chamada final.
 - **Headline pequeno** (900, clamp 2.5–4.5rem): títulos de seção.
 - **Title** (900, clamp 1.625–2.25rem, 0,95): categorias, competições, etapas da reserva, itens de formação.
@@ -238,17 +238,17 @@ Mobile first, validado em 320, 375, 390 e 430 px e no desktop. O recipiente vai 
 
 Listas são linhas, não cards: cada item é uma faixa separada por traço de quadra (categorias e horários, patrocinadores, formação do técnico, recursos da Arena, linha do tempo). Tabelas comparativas (preços da Arena, números do resumo no painel) usam células divididas por traço de 1px, sem caixas soltas.
 
-No celular, a Home é vídeo vertical em tela cheia com título no alto, jogador livre no meio e seta descendo até os botões, que ocupam a largura toda. No desktop, título à esquerda, quadra horizontal ao fundo e vídeo 9:16 à direita. A ação principal fica visível sem rolar. O cabeçalho é fixo (64px no celular, 80px no desktop), transparente sobre o vídeo da Home e preto com traço inferior no resto; `scroll-padding-top` de 5.5rem.
+No celular (92svh), a Home é vídeo vertical em tela cheia atrás de um véu preto uniforme de 55% (a camada na frente do vídeo), com título no alto, o jogo visível pelo véu e a seta descendo até os botões, que ocupam a largura toda. No desktop, o vídeo vira uma coluna (até 50vw) que sangra até o topo, a base e a borda direita e se dissolve no preto pela esquerda com `mask-image` (classe `.hero-video`), sem moldura; título à esquerda (até 50% da largura) e a quadra horizontal ao fundo, com o círculo central onde o vídeo some. A ação principal fica visível sem rolar. O cabeçalho é fixo (64px no celular, 80px no desktop), transparente sobre o vídeo da Home e preto com traço inferior no resto; `scroll-padding-top` de 5.5rem.
 
 **A Regra das Linhas.** Coleções de itens parecidos viram linhas com traço entre elas. Grade de cards iguais é a recusa central desta direção.
 
 ## Elevation & Depth
 
-Plano. A profundidade vem de três camadas tonais (preto, feltro, friso) e do traço de quadra. Não há sombra decorativa em quadros, botões ou fotos. Sobre o vídeo da Home, a legibilidade vem de degradês pretos (scrim) e de uma sombra de texto suave no título, só no celular.
+Plano. A profundidade vem de três camadas tonais (preto, feltro, friso) e do traço de quadra. Não há sombra decorativa em quadros, botões ou fotos. Sobre o vídeo da Home, a legibilidade vem do véu preto uniforme no celular (55%), de um degradê na base atrás dos botões e, no desktop, da máscara que dissolve o vídeo no preto.
 
 ### Shadow Vocabulary
 - **Flutuante** (`box-shadow: 0 8px 24px rgb(0 0 0 / 0.6)`): só elementos fixos que passam por cima do conteúdo ao rolar (aviso do painel).
-- **Legibilidade sobre vídeo** (`text-shadow: 0 2px 18px rgb(0 0 0 / 0.45)`): título da Home no celular; desligada no desktop.
+- **Legibilidade sobre vídeo**: véu (`bg-black/55` no celular, `bg-black/10` no desktop) mais degradê na base; nenhuma sombra de texto.
 
 ### Named Rules
 **A Regra do Traço.** Se uma área precisa ser separada, desenhe a linha da quadra. Sombra só existe para o que flutua de fato sobre a página.
@@ -317,7 +317,7 @@ Números de conquista em Número neon, com o X do escudo no lugar do sinal de ve
 Anos em título grande à esquerda; à direita, uma linha vertical de traço forte com peças da prancheta: X (do escudo) para título ou pódio, O (círculo vazado branco) para campanha. Colocação em branco semibold quando é título, em giz quando é campanha.
 
 ### A jogada (assinatura da Home)
-A SetaJogada desce sobre o vídeo e termina no botão neon. O título sobe linha a linha (0,8s, 70ms entre linhas), a seta se traça em 0,9s com 0,55s de atraso e a ponta 0,7s depois, e os botões surgem em 0,9s. Só `stroke-dashoffset`, `opacity` e `transform`, na curva de saída `cubic-bezier(0.16, 1, 0.3, 1)`, uma vez.
+A SetaJogada desce sobre o vídeo e termina no botão neon. O título sobe linha a linha (0,8s, 80ms entre linhas), a seta se traça em 0,9s com 0,5s de atraso e a ponta 0,7s depois, e os botões surgem a 0,85s. Só `stroke-dashoffset`, `opacity` e `transform`, na curva de saída `cubic-bezier(0.16, 1, 0.3, 1)`, uma vez.
 
 ### O laço de marcador (assinatura da Escolinha)
 A categoria encontrada pelo ano é circulada em branco por um laço de 2.5px que se fecha uma vez (0,9s), na resposta e na linha da categoria no quadro. Uma nova busca desenha o laço de novo.
