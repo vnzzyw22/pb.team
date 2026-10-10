@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   formatarHora,
@@ -410,7 +411,16 @@ export function ReservaArena({ onReservada }: { onReservada?: (codigo: string) =
               {enviando ? "Reservando…" : "Reservar e pagar o sinal"}
             </button>
             <p className="ajuda">
-              O horário fica segurado por {POLITICA.prazoSinalMin} minutos enquanto você paga o sinal pelo Pix.
+              O horário fica segurado por {POLITICA.prazoSinalMin} minutos enquanto você paga o sinal pelo Pix. Ao reservar, você
+              concorda com os{" "}
+              <Link href="/termos" className="underline decoration-dashed underline-offset-4 hover:text-branco">
+                termos de uso
+              </Link>{" "}
+              e a{" "}
+              <Link href="/privacidade" className="underline decoration-dashed underline-offset-4 hover:text-branco">
+                política de privacidade
+              </Link>
+              .
             </p>
           </Etapa>
         )}

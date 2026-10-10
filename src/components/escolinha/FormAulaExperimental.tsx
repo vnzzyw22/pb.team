@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   categoriaPorAnoNascimento,
@@ -31,6 +32,7 @@ const ERROS: Record<ErroLead, { campo: NomeCampo; texto: string }> = {
 };
 
 const ORDEM: NomeCampo[] = ["responsavel", "telefone", "atleta", "ano", "turma"];
+const TEXTO_AUTORIZACAO = "Confirme que você é o responsável pelo atleta e autoriza o uso dos dados.";
 const VAZIO = { responsavel: "", telefone: "", atleta: "", ano: "", turmaId: "", observacoes: "" };
 
 export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }) {
@@ -41,6 +43,7 @@ export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }
   const [enviando, setEnviando] = useState(false);
   const [erroGeral, setErroGeral] = useState<string | null>(null);
   const [whatsapp, setWhatsapp] = useState<string | null>(null);
+  const [autorizado, setAutorizado] = useState(false);
   const secao = useRef<HTMLElement>(null);
   const primeiroCampo = useRef<HTMLInputElement>(null);
   const resumo = useRef<HTMLDivElement>(null);
@@ -96,7 +99,7 @@ export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }
     setErroGeral(null);
     const atuais = validar();
     setErros(atuais);
-    if (atuais.length) {
+    if (atuais.length || !autorizado) {
       requestAnimationFrame(() => resumo.current?.focus());
       return;
     }
@@ -120,11 +123,15 @@ export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }
     }
   }
 
+  const erroAutorizacao = tentou && !autorizado ? TEXTO_AUTORIZACAO : undefined;
   const itensResumo = tentou
-    ? ORDEM.flatMap((campo) => {
-        const e = erros.find((x) => ERROS[x].campo === campo);
-        return e ? [{ campo: `aula-${campo}`, texto: ERROS[e].texto }] : [];
-      })
+    ? [
+        ...ORDEM.flatMap((campo) => {
+          const e = erros.find((x) => ERROS[x].campo === campo);
+          return e ? [{ campo: `aula-${campo}`, texto: ERROS[e].texto }] : [];
+        }),
+        ...(erroAutorizacao ? [{ campo: "aula-autorizacao", texto: erroAutorizacao }] : []),
+      ]
     : [];
 
   return (
@@ -161,6 +168,7 @@ export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }
                   onClick={() => {
                     setWhatsapp(null);
                     setValores(VAZIO);
+                    setAutorizado(false);
                     setTocados(new Set());
                     setTentou(false);
                     setErros([]);
@@ -282,6 +290,33 @@ export function FormAulaExperimental({ pedido }: { pedido: PedidoDeAgendamento }
                   onChange={(e) => mudar("observacoes", e.target.value)}
                 />
               </Campo>
+
+              <div>
+                <label htmlFor="aula-autorizacao" className="flex cursor-pointer items-start gap-3">
+                  <input
+                    id="aula-autorizacao"
+                    type="checkbox"
+                    className="mt-1 h-5 w-5 shrink-0"
+                    checked={autorizado}
+                    onChange={(e) => setAutorizado(e.target.checked)}
+                    aria-invalid={erroAutorizacao ? true : undefined}
+                    aria-describedby={erroAutorizacao ? "aula-autorizacao-erro" : undefined}
+                  />
+                  <span className="text-[0.9375rem] leading-relaxed">
+                    Sou o pai, a mãe ou o responsável legal pelo atleta e autorizo o {CLUBE.nome} a usar estes dados para combinar a
+                    aula experimental, conforme a{" "}
+                    <Link href="/privacidade" className="link-jogada font-normal">
+                      política de privacidade
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {erroAutorizacao && (
+                  <p id="aula-autorizacao-erro" className="erro-campo">
+                    {erroAutorizacao}
+                  </p>
+                )}
+              </div>
 
               <div>
                 <button type="submit" className="btn btn-neon w-full sm:w-auto" disabled={enviando} aria-busy={enviando || undefined}>

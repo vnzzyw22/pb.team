@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { CLUBE, linkWhatsApp, mensagens } from "@/lib";
 import { abrirWhatsApp } from "@/components/ui/abaWhatsApp";
@@ -72,7 +73,13 @@ export function FormAnuncie() {
         <button type="submit" className="btn btn-claro w-full sm:w-auto">
           Enviar pelo WhatsApp
         </button>
-        <p className="ajuda">Você conversa direto com {CLUBE.anuncie.contato.nome}.</p>
+        <p className="ajuda">
+          Você conversa direto com {CLUBE.anuncie.contato.nome}. Os dados vão só na mensagem do WhatsApp; nada fica salvo no site (
+          <Link href="/privacidade" className="underline decoration-dashed underline-offset-4 hover:text-branco">
+            privacidade
+          </Link>
+          ).
+        </p>
       </div>
     </form>
   );

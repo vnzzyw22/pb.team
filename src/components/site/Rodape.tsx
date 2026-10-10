@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CLUBE, formatarTelefone } from "@/lib";
 import { Escudo } from "@/components/Escudo";
 import { IconeInstagram, IconeWhatsApp } from "@/components/grafismos";
-import { ITENS_MENU, urlInstagram, whatsappDaArena, whatsappDoClube } from "./navegacao";
+import { ITENS_MENU, LINKS_LEGAIS, urlInstagram, whatsappDaArena, whatsappDoClube } from "./navegacao";
 
 export function Rodape() {
   const ano = new Date().getFullYear();
@@ -87,9 +87,20 @@ export function Rodape() {
         <p>
           © {ano} {CLUBE.nomeCompleto}
         </p>
-        <Link href="/painel/entrar" className="inline-flex min-h-11 items-center hover:text-branco">
-          Painel do clube
-        </Link>
+        <ul className="flex flex-wrap gap-x-6">
+          {LINKS_LEGAIS.map((l) => (
+            <li key={l.href}>
+              <Link href={l.href} className="inline-flex min-h-11 items-center hover:text-branco">
+                {l.rotulo}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Link href="/painel/entrar" className="inline-flex min-h-11 items-center hover:text-branco">
+              Painel do clube
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );

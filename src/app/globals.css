@@ -377,6 +377,65 @@
     border-color: rgb(143 216 168 / 0.5);
   }
 
+  /* Texto longo (páginas legais): branco suave, entrelinha folgada, listas marcadas como traço de quadra. */
+  .texto-legal {
+    color: rgb(255 255 255 / 0.88);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .texto-legal p + p,
+  .texto-legal p + ul,
+  .texto-legal ul + p,
+  .texto-legal table + p,
+  .texto-legal p + table {
+    margin-top: 1rem;
+  }
+  .texto-legal ul {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .texto-legal li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+  .texto-legal li::before {
+    content: "";
+    position: absolute;
+    top: 0.68em;
+    left: 0.15rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1.5px solid var(--color-giz);
+  }
+  .texto-legal strong {
+    color: var(--color-branco);
+    font-weight: 650;
+  }
+  .texto-legal a:not(.btn) {
+    color: var(--color-branco);
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: rgb(255 255 255 / 0.55);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.3em;
+  }
+  .texto-legal table {
+    width: 100%;
+    border-top: 1px solid var(--color-linha);
+    font-size: 0.9375rem;
+    text-align: left;
+  }
+  .texto-legal th,
+  .texto-legal td {
+    padding: 0.75rem 1rem 0.75rem 0;
+    border-bottom: 1px solid var(--color-linha);
+    vertical-align: top;
+  }
+  .texto-legal th {
+    color: var(--color-giz);
+    font-weight: 650;
+  }
+
   /* Desktop: a coluna de vídeo se dissolve no preto pela esquerda, sem moldura. */
   @media (min-width: 1024px) {
     .hero-video {

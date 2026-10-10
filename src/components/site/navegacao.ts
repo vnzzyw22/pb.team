@@ -9,6 +9,13 @@ export const ITENS_MENU = [
   { href: "/patrocinadores", rotulo: "Patrocinadores" },
 ] as const;
 
+/** Páginas legais, no rodapé e no sitemap. */
+export const LINKS_LEGAIS = [
+  { href: "/termos", rotulo: "Termos de uso" },
+  { href: "/privacidade", rotulo: "Privacidade" },
+  { href: "/cookies", rotulo: "Cookies" },
+] as const;
+
 export const ANCORA_AULA = "/escolinha#aula-experimental";
 export const ANCORA_RESERVA = "/arena#reservar";
 
