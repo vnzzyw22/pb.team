@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable: só o contrato das superfícies e o design.json entram no git
+/.impeccable/*
+!/.impeccable/surfaces/
+!/.impeccable/design.json
