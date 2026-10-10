@@ -21,9 +21,10 @@ export function FaixaConquistas({ tamanho = "faixa" }: FaixaConquistasProps) {
       <ul className="grid grid-cols-3 gap-x-3 sm:gap-x-6 lg:gap-x-10">
         {contadas.map((c) => (
           <li key={c.titulo} className="border-t border-linha-forte pt-5">
-            <p className={`numero text-neon ${numero}`} aria-hidden>
+            <p className={`numero flex items-start text-neon ${numero}`} aria-hidden>
               {c.vezes}
-              <span className="ml-0.5 align-top text-[0.42em] leading-none">×</span>
+              {/* o X do escudo no lugar do sinal de vezes */}
+              <MarcaX espessura={2.6} className="ml-[0.06em] mt-[0.04em] h-[0.3em] w-[0.3em] shrink-0" />
             </p>
             <p className="mt-4 text-[0.9375rem] font-semibold leading-snug sm:text-lg">
               <span className="sr-only">{c.vezes} vezes: </span>

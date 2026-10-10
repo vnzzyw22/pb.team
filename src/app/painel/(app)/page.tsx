@@ -22,6 +22,7 @@ export default async function PaginaHoje({ searchParams }: { searchParams: Promi
 
   return (
     <div className="grid gap-12">
+      <h1 className="sr-only">Agenda de hoje e pendências</h1>
       {pendentes.ok && pendentes.dados.length > 0 && (
         <section aria-labelledby="titulo-pendentes">
           <h2 id="titulo-pendentes" className="titulo t-3">

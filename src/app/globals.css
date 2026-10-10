@@ -18,6 +18,9 @@
   --color-neon-vivo: #d3e832;
   --color-alerta: #ff8a7a;
   --color-ok: #8fd8a8;
+  /* Gráficos do painel: par validado contra o preto (luminosidade, croma, daltonismo, contraste). */
+  --color-grafico-treino: #4a72b8;
+  --color-grafico-livre: #8c9d00;
 
   --ease-saida: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -138,7 +141,7 @@
     font-size: clamp(3.5rem, 18vw, 6rem);
   }
   .t-1 {
-    font-size: clamp(2.75rem, 13.5vw, 6rem);
+    font-size: clamp(2.5rem, 12.5vw, 6rem);
   }
   .t-2 {
     font-size: clamp(2.5rem, 10.5vw, 4.5rem);
@@ -370,7 +373,7 @@
   /* Botão de pausar o vídeo de fundo (alvo de toque de 44px). */
   .botao-midia {
     position: absolute;
-    z-index: 10;
+    z-index: 20;
     display: grid;
     width: 2.75rem;
     height: 2.75rem;

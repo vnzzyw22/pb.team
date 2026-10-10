@@ -3,9 +3,9 @@
  * de jogada. Todas decorativas (aria-hidden) e na cor do texto ao redor.
  */
 
-export function MarcaX({ className = "h-3 w-3" }: { className?: string }) {
+export function MarcaX({ className = "h-3 w-3", espessura = 1.6 }: { className?: string; espessura?: number }) {
   return (
-    <svg viewBox="0 0 12 12" className={className} aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg viewBox="0 0 12 12" className={className} aria-hidden fill="none" stroke="currentColor" strokeWidth={espessura}>
       <path d="M1.5 1.5 10.5 10.5M10.5 1.5 1.5 10.5" />
     </svg>
   );

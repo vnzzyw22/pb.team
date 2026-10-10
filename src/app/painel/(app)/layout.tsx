@@ -39,12 +39,12 @@ export default async function LayoutPrivado({ children }: Readonly<{ children: R
         <NavPainel />
       </header>
       {demo && (
-        <div className="border-b border-linha bg-feltro">
+        <aside aria-label="Modo demonstração" className="border-b border-linha bg-feltro">
           <div className="recipiente flex flex-wrap items-center justify-between gap-3 py-2.5">
             <p className="text-sm text-giz">Modo demonstração: os dados são de exemplo.</p>
             <ResetarDemo />
           </div>
-        </div>
+        </aside>
       )}
       <main id="conteudo-painel" tabIndex={-1} className="recipiente pb-24 pt-8 outline-none lg:pt-10">
         {children}

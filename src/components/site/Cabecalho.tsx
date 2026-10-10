@@ -73,9 +73,12 @@ export function Cabecalho() {
       }`}
     >
       <div className="recipiente flex h-16 items-center justify-between gap-6 lg:h-20">
-        <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={`${CLUBE.nomeCompleto}: página inicial`}>
+        <Link href="/" className="flex shrink-0 items-center gap-3">
           <Escudo decorativo contorno className="h-10 w-10 lg:h-12 lg:w-12" />
-          <span className="titulo text-[1.5rem] lg:text-[1.75rem]">{CLUBE.nome}</span>
+          <span className="titulo text-[1.5rem] lg:text-[1.75rem]">
+            {CLUBE.nome}
+            <span className="sr-only"> (página inicial)</span>
+          </span>
         </Link>
 
         <nav aria-label="Principal" className="hidden lg:block">

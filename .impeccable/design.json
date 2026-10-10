@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-10T12:00:00-03:00",
+  "title": "Design System: PB Team Futsal",
+  "extensions": {
+    "colorMeta": {
+      "preto": { "role": "neutral", "displayName": "Preto de prancheta", "canonical": "#000000", "tonalRamp": ["#000000", "#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca"] },
+      "feltro": { "role": "neutral", "displayName": "Feltro", "canonical": "#0e0e0e", "tonalRamp": ["#0b0b0b", "#0e0e0e", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca"] },
+      "friso": { "role": "neutral", "displayName": "Friso", "canonical": "#181818", "tonalRamp": ["#0b0b0b", "#181818", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca"] },
+      "linha": { "role": "neutral", "displayName": "Traço de quadra", "canonical": "rgb(255 255 255 / 0.14)", "tonalRamp": ["rgb(255 255 255 / 0.06)", "rgb(255 255 255 / 0.07)", "rgb(255 255 255 / 0.10)", "rgb(255 255 255 / 0.12)", "rgb(255 255 255 / 0.14)", "rgb(255 255 255 / 0.22)", "rgb(255 255 255 / 0.28)", "rgb(255 255 255 / 0.30)"] },
+      "linha-forte": { "role": "neutral", "displayName": "Traço forte", "canonical": "rgb(255 255 255 / 0.3)", "tonalRamp": ["rgb(255 255 255 / 0.14)", "rgb(255 255 255 / 0.26)", "rgb(255 255 255 / 0.3)", "rgb(255 255 255 / 0.4)", "rgb(255 255 255 / 0.42)", "rgb(255 255 255 / 0.45)", "rgb(255 255 255 / 0.55)", "rgb(255 255 255 / 0.85)"] },
+      "branco": { "role": "neutral", "displayName": "Branco", "canonical": "#ffffff", "tonalRamp": ["#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee", "#ffffff"] },
+      "giz": { "role": "neutral", "displayName": "Giz", "canonical": "oklch(73.2% 0 0)", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee"] },
+      "neon": { "role": "primary", "displayName": "Verde-limão de marcador", "canonical": "oklch(81.4% 0.185 116.6)", "tonalRamp": ["#0a0d00", "#222800", "#3d4500", "#5a6500", "#7c8a00", "#9fb100", "#c4d824", "#e7fe59"] },
+      "neon-vivo": { "role": "primary", "displayName": "Neon aceso", "canonical": "oklch(88.6% 0.191 116.4)", "tonalRamp": ["#0a0d00", "#222800", "#3d4500", "#5a6500", "#7c8904", "#9fb100", "#c4d90f", "#e8fe50"] },
+      "alerta": { "role": "error", "displayName": "Coral de alerta", "canonical": "oklch(75.8% 0.145 29)", "tonalRamp": ["#220000", "#4d0000", "#7b0906", "#9f3329", "#c8594b", "#f27e6e", "#ffb1a4", "#ffe6e0"] },
+      "ok": { "role": "success", "displayName": "Menta de confirmação", "canonical": "oklch(82.1% 0.1 154.8)", "tonalRamp": ["#001102", "#002e12", "#004e27", "#236e44", "#4a9265", "#6fb789", "#95deae", "#b9ffd1"] },
+      "grafico-treino": { "role": "data", "displayName": "Azul de treino", "canonical": "oklch(55.6% 0.118 260.9)", "tonalRamp": ["#00003c", "#001d5c", "#173c7d", "#355ca0", "#577fc7", "#7aa5ef", "#abccff", "#e2efff"] },
+      "grafico-livre": { "role": "data", "displayName": "Oliva livre", "canonical": "oklch(65.9% 0.152 117.2)", "tonalRamp": ["#0a0d00", "#222800", "#3d4500", "#596500", "#7b8a00", "#9eb02a", "#c4d759", "#e7fc7e"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Título da Home", "purpose": "Só o título da Home, quebrado linha a linha no código." },
+      "headline": { "displayName": "Título de página", "purpose": "Títulos de página e da chamada final." },
+      "headline-sm": { "displayName": "Título de seção", "purpose": "Títulos de seção." },
+      "title": { "displayName": "Título de item", "purpose": "Categorias, competições, etapas da reserva, itens de formação." },
+      "title-sm": { "displayName": "Título curto", "purpose": "Nomes de categoria em lista curta." },
+      "body": { "displayName": "Texto", "purpose": "Texto corrido, até 62ch." },
+      "lead": { "displayName": "Abertura", "purpose": "Abertura logo abaixo do título, quase sempre em giz." },
+      "label": { "displayName": "Rótulo", "purpose": "Rótulos de campo e de bloco, em caixa de frase." },
+      "dado": { "displayName": "Dado", "purpose": "Horários, preços, telefones, códigos, datas." },
+      "numero": { "displayName": "Número", "purpose": "Números de conquista, contagem do sinal, números de etapa." },
+      "marca": { "displayName": "Marca", "purpose": "Nomes de patrocinadores sem logo." }
+    },
+    "shadows": [
+      { "name": "flutuante", "value": "0 8px 24px rgb(0 0 0 / 0.6)", "purpose": "Só elementos fixos que passam por cima do conteúdo ao rolar (aviso do painel)." },
+      { "name": "legibilidade-video", "value": "0 2px 18px rgb(0 0 0 / 0.45)", "purpose": "text-shadow do título da Home sobre o vídeo, só no celular." }
+    ],
+    "motion": [
+      { "name": "ease-saida", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Curva de saída de todas as transições e desenhos." },
+      { "name": "desenhar", "value": "stroke-dashoffset 1 → 0, 0.9s ease-saida, atraso por --atraso", "purpose": "Seta da jogada na Home e laço de marcador na Escolinha; uma vez." },
+      { "name": "surgir", "value": "opacity 0 → 1 e translateY(0.9rem) → 0, 0.8s ease-saida", "purpose": "Linhas do título da Home (70ms entre linhas) e botões do hero." },
+      { "name": "abrir-menu", "value": "opacity 0 → 1 e translateY(-8px) → 0, 0.22s ease-saida", "purpose": "Abertura do menu do celular." },
+      { "name": "estado", "value": "0.18s ease-saida (cor, borda, fundo); 0.12s transform", "purpose": "Hover e pressionado de botões." },
+      { "name": "reduzir-movimento", "value": "prefers-reduced-motion: reduce → sem animação, vídeo vira pôster", "purpose": "Tudo aparece desenhado e no lugar." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão neon",
+      "kind": "button",
+      "refersTo": "button-neon",
+      "description": "Ação principal: agendar, reservar, confirmar sinal, enviar comprovante.",
+      "html": "<button class=\"ds-btn ds-btn-neon\">Agende uma aula experimental</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem; min-height: 3.25rem; padding: 0.75rem 1.375rem; border: 1.5px solid transparent; border-radius: 0; font-family: var(--font-sans, Archivo, 'Arial Narrow', Arial, sans-serif); font-size: 1rem; font-weight: 750; font-variation-settings: 'wdth' 88; line-height: 1.15; cursor: pointer; transition: background-color 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s cubic-bezier(0.16,1,0.3,1), transform 0.12s cubic-bezier(0.16,1,0.3,1); } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; } .ds-btn-neon { background: #bcd00e; color: #000; } .ds-btn-neon:hover { background: #d3e832; }"
+    },
+    {
+      "name": "Botão contorno",
+      "kind": "button",
+      "refersTo": "button-contorno",
+      "description": "Ação neon secundária ao lado da principal.",
+      "html": "<button class=\"ds-btn-contorno\">Reserve a Arena</button>",
+      "css": ".ds-btn-contorno { display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0.75rem 1.375rem; border: 1.5px solid #bcd00e; border-radius: 0; background: rgb(0 0 0 / 0.4); color: #bcd00e; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; font-size: 1rem; font-weight: 750; font-variation-settings: 'wdth' 88; cursor: pointer; transition: background-color 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn-contorno:hover { background: rgb(188 208 14 / 0.14); } .ds-btn-contorno:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Botão claro",
+      "kind": "button",
+      "refersTo": "button-claro",
+      "description": "Ações neutras do site: buscar turma, copiar Pix, WhatsApp.",
+      "html": "<button class=\"ds-btn-claro\">Encontrar a turma</button>",
+      "css": ".ds-btn-claro { display: inline-flex; align-items: center; justify-content: center; min-height: 3.25rem; padding: 0.75rem 1.375rem; border: 1.5px solid rgb(255 255 255 / 0.42); border-radius: 0; background: transparent; color: #fff; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; font-size: 1rem; font-weight: 750; font-variation-settings: 'wdth' 88; cursor: pointer; transition: background-color 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn-claro:hover { border-color: #fff; background: rgb(255 255 255 / 0.06); } .ds-btn-claro:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Botão sóbrio e perigo (painel)",
+      "kind": "button",
+      "refersTo": "button-sobrio",
+      "description": "Ações do painel do dono; perigo para cancelar e apagar.",
+      "html": "<div class=\"ds-linha\"><button class=\"ds-btn-sobrio\">Registrar pagamento</button><button class=\"ds-btn-perigo\">Cancelar</button></div>",
+      "css": ".ds-linha { display: flex; gap: 0.5rem; background: #000; padding: 1rem; } .ds-btn-sobrio, .ds-btn-perigo { min-height: 2.75rem; padding: 0.5rem 1rem; border-radius: 0; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; font-size: 0.9375rem; font-weight: 750; font-variation-settings: 'wdth' 88; cursor: pointer; transition: border-color 0.18s cubic-bezier(0.16,1,0.3,1), background-color 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn-sobrio { border: 1.5px solid rgb(255 255 255 / 0.3); background: #181818; color: #fff; } .ds-btn-sobrio:hover { border-color: rgb(255 255 255 / 0.55); } .ds-btn-perigo { border: 1.5px solid rgb(255 138 122 / 0.6); background: transparent; color: #ff8a7a; } .ds-btn-perigo:hover { border-color: #ff8a7a; background: rgb(255 138 122 / 0.08); } .ds-btn-sobrio:focus-visible, .ds-btn-perigo:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Campo com erro",
+      "kind": "input",
+      "refersTo": "entrada",
+      "description": "Rótulo sempre visível, campo reto em feltro, erro em coral ligado por aria-describedby.",
+      "html": "<div class=\"ds-campo\"><label class=\"ds-rotulo\" for=\"ds-tel\">WhatsApp</label><input id=\"ds-tel\" class=\"ds-entrada\" aria-invalid=\"true\" placeholder=\"(44) 99999-9999\"><p class=\"ds-erro\">Confira o número com DDD.</p></div>",
+      "css": ".ds-campo { background: #000; padding: 1rem; color: #fff; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; } .ds-rotulo { display: block; font-size: 0.9375rem; font-weight: 650; line-height: 1.3; } .ds-entrada { width: 100%; margin-top: 0.5rem; min-height: 3.25rem; padding: 0.75rem 0.875rem; border: 1px solid rgb(255 255 255 / 0.26); border-radius: 0; background: #0e0e0e; color: #fff; font: inherit; font-size: 1rem; font-variation-settings: 'wdth' 80; font-variant-numeric: tabular-nums; caret-color: #bcd00e; transition: border-color 0.15s; } .ds-entrada::placeholder { color: #8c8c8c; } .ds-entrada:hover { border-color: rgb(255 255 255 / 0.45); } .ds-entrada:focus-visible { border-color: #bcd00e; outline: 1px solid #bcd00e; outline-offset: 0; } .ds-entrada[aria-invalid='true'] { border-color: #ff8a7a; } .ds-erro { margin-top: 0.5rem; color: #ff8a7a; font-size: 0.9375rem; line-height: 1.35; }"
+    },
+    {
+      "name": "Ficha de horário",
+      "kind": "chip",
+      "refersTo": "ficha",
+      "description": "Fichas de rádio do passo a passo da reserva; marcada vira bloco neon.",
+      "html": "<div class=\"ds-fichas\"><label class=\"ds-ficha\"><input type=\"radio\" name=\"h\"><span class=\"ds-h\">19:00</span><span class=\"ds-p\">R$ 120,00</span></label><label class=\"ds-ficha\"><input type=\"radio\" name=\"h\" checked><span class=\"ds-h\">20:00</span><span class=\"ds-p\">R$ 140,00</span></label></div>",
+      "css": ".ds-fichas { display: grid; grid-template-columns: repeat(3, 6rem); gap: 0.5rem; background: #000; padding: 1rem; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; } .ds-ficha { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 4.75rem; border: 1px solid rgb(255 255 255 / 0.3); border-radius: 0; color: #fff; cursor: pointer; transition: background-color 0.15s, border-color 0.15s; } .ds-ficha input { position: absolute; opacity: 0; width: 1px; height: 1px; } .ds-h { font-size: 1.25rem; font-weight: 650; font-variation-settings: 'wdth' 80; font-variant-numeric: tabular-nums; color: #bcd00e; } .ds-p { font-size: 0.875rem; font-weight: 650; font-variation-settings: 'wdth' 80; } .ds-ficha:has(:checked) { background: #bcd00e; border-color: #bcd00e; color: #000; } .ds-ficha:has(:checked) .ds-h { color: #000; } .ds-ficha:has(:focus-visible) { outline: 2px solid #bcd00e; outline-offset: 2px; }"
+    },
+    {
+      "name": "Navegação do site",
+      "kind": "nav",
+      "refersTo": "navegacao",
+      "description": "Cabeçalho preto com nome em título condensado, links em giz e botão neon pequeno.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-marca\">PB Team</span><a href=\"#\" aria-current=\"page\">Escolinha</a><a href=\"#\">Conquistas</a><a href=\"#\">Arena</a><a href=\"#\" class=\"ds-nav-acao\">Agendar aula</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 0.25rem; min-height: 5rem; padding: 0 1.5rem; background: #000; border-bottom: 1px solid rgb(255 255 255 / 0.14); font-family: Archivo, 'Arial Narrow', Arial, sans-serif; } .ds-nav-marca { margin-right: auto; color: #fff; font-size: 1.75rem; font-weight: 900; font-variation-settings: 'wdth' 62; text-transform: uppercase; line-height: 0.88; } .ds-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.75rem; color: #a8a8a8; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: color 0.15s; } .ds-nav a:hover { color: #fff; } .ds-nav a[aria-current='page'] { color: #fff; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.6em; } .ds-nav a:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; } .ds-nav a.ds-nav-acao { margin-left: 0.75rem; min-height: 2.75rem; padding: 0.5rem 1rem; background: #bcd00e; color: #000; font-weight: 750; font-variation-settings: 'wdth' 88; } .ds-nav a.ds-nav-acao:hover { background: #d3e832; color: #000; }"
+    },
+    {
+      "name": "Lista em linhas com MarcaX",
+      "kind": "custom",
+      "refersTo": "lista-linhas",
+      "description": "Coleções viram linhas separadas por traço de quadra, com o X do escudo como marcador.",
+      "html": "<ul class=\"ds-lista\"><li><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M1.5 1.5 10.5 10.5M10.5 1.5 1.5 10.5\"/></svg><span>Licença CBFS B</span></li><li><svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M1.5 1.5 10.5 10.5M10.5 1.5 1.5 10.5\"/></svg><span>Educação Física (UEM)</span></li></ul>",
+      "css": ".ds-lista { list-style: none; margin: 0; padding: 1rem; background: #000; border-top: 1px solid rgb(255 255 255 / 0.14); font-family: Archivo, 'Arial Narrow', Arial, sans-serif; } .ds-lista li { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgb(255 255 255 / 0.14); color: #fff; } .ds-lista svg { width: 1rem; height: 1rem; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; } .ds-lista span { font-size: clamp(1.625rem, 6vw, 2.25rem); font-weight: 900; font-variation-settings: 'wdth' 62; text-transform: uppercase; line-height: 0.95; }"
+    },
+    {
+      "name": "Placar de conquistas",
+      "kind": "custom",
+      "refersTo": "placar-conquistas",
+      "description": "Número de conquista em neon com o X do escudo no lugar do sinal de vezes.",
+      "html": "<div class=\"ds-placar\"><p class=\"ds-num\">4<svg viewBox=\"0 0 12 12\" aria-hidden=\"true\"><path d=\"M1.5 1.5 10.5 10.5M10.5 1.5 1.5 10.5\"/></svg></p><p class=\"ds-tit\">Campeão paranaense</p></div>",
+      "css": ".ds-placar { background: #000; padding: 1.25rem 1rem; border-top: 1px solid rgb(255 255 255 / 0.3); font-family: Archivo, 'Arial Narrow', Arial, sans-serif; color: #fff; } .ds-num { display: flex; align-items: flex-start; margin: 0; color: #bcd00e; font-size: 6rem; font-weight: 900; font-variation-settings: 'wdth' 62; font-variant-numeric: tabular-nums lining-nums; line-height: 0.82; } .ds-num svg { width: 0.3em; height: 0.3em; margin-left: 0.06em; margin-top: 0.04em; fill: none; stroke: currentColor; stroke-width: 2.6; } .ds-tit { margin: 1rem 0 0; font-size: 1.125rem; font-weight: 600; }"
+    },
+    {
+      "name": "Aviso",
+      "kind": "card",
+      "refersTo": "aviso",
+      "description": "Mensagem de erro ou sucesso: a cor fica só na borda.",
+      "html": "<div class=\"ds-avisos\"><div class=\"ds-aviso ds-aviso-erro\" role=\"alert\"><p class=\"ds-aviso-t\">Confira os campos abaixo</p><a href=\"#\">Informe o WhatsApp com DDD.</a></div><div class=\"ds-aviso ds-aviso-ok\" role=\"status\"><p>Pagamento de R$ 80,00 registrado.</p></div></div>",
+      "css": ".ds-avisos { display: grid; gap: 0.75rem; background: #000; padding: 1rem; font-family: Archivo, 'Arial Narrow', Arial, sans-serif; color: #fff; } .ds-aviso { border: 1px solid rgb(255 255 255 / 0.3); background: #0e0e0e; padding: 1rem 1.125rem; border-radius: 0; } .ds-aviso p { margin: 0; } .ds-aviso-erro { border-color: rgb(255 138 122 / 0.55); } .ds-aviso-ok { border-color: rgb(143 216 168 / 0.5); } .ds-aviso-t { color: #ff8a7a; font-weight: 600; } .ds-aviso a { display: inline-block; margin-top: 0.5rem; color: #fff; text-decoration: underline dashed; text-underline-offset: 4px; } .ds-aviso a:focus-visible { outline: 2px solid #bcd00e; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "A prancheta do técnico",
+    "overview": "O site é a prancheta que o técnico usa no banco: preto puro, a quadra desenhada em traço branco fino nas medidas oficiais, o X do escudo marcando o que importa e a seta da jogada levando o olho até a ação. Tudo o que a pessoa lê é giz sobre preto; a única cor que acende é o verde-limão das artes \"Horário de treino\", e ela só aparece onde há uma jogada a fazer (agendar, reservar, pagar o sinal), um horário ou um número de conquista.\n\nA densidade é de prancheta, não de revista: listas em linhas finas, títulos condensados enormes como letra de marcador, fotos reais do clube cortadas em retângulos retos. O site recusa o padrão da categoria esportiva: foto de ação com grade de cards iguais e faixa de estatísticas. O painel do dono herda o mesmo material numa versão sóbria, de operação, em que o neon fica quase só no sinal pendente.\n\nO movimento é desenho, não animação: a seta da jogada se traça uma vez na Home e o círculo de marcador se fecha em volta da categoria encontrada na Escolinha. Com \"reduzir movimento\", tudo já está desenhado.",
+    "keyCharacteristics": [
+      "Preto puro (#000) como prancheta; nunca cinza-escuro de fundo.",
+      "Uma família (Archivo variável) com o eixo de largura como hierarquia: 62 nos títulos, 80 nos dados, 100 no texto, 125 nas marcas.",
+      "Neon raro e funcional: ação, horário, sinal e conquista.",
+      "Traço de quadra (linha 14%) no lugar de sombra, card e cor de fundo.",
+      "Cantos retos em tudo o que é superfície; círculos só em controles flutuantes, pontos de status e no \"O\" da linha do tempo.",
+      "Grafismos desenhados no código (quadra, X, seta, círculo de marcador), sempre aria-hidden e na cor do texto."
+    ],
+    "rules": [
+      { "name": "A Regra do Neon", "body": "Se não é ação de agendar, reservar ou pagar o sinal, horário, prazo do sinal ou número de conquista, não é neon. Foco de teclado é neon porque é ação.", "section": "colors" },
+      { "name": "A Regra da Prancheta Preta", "body": "O fundo é #000. Profundidade vem de feltro (#0e0e0e) e traço, nunca de cinza médio ou gradiente decorativo.", "section": "colors" },
+      { "name": "A Regra da Largura", "body": "Hierarquia se faz com o eixo de largura e o peso, não com outra família nem com itálico.", "section": "typography" },
+      { "name": "A Regra do Título Limpo", "body": "Sem rótulo em caixa alta acima do título, sem palavra colorida dentro do título, sem itálico de destaque. Títulos usam text-wrap: balance; parágrafos, pretty.", "section": "typography" },
+      { "name": "A Regra das Linhas", "body": "Coleções de itens parecidos viram linhas com traço entre elas. Grade de cards iguais é a recusa central desta direção.", "section": "layout" },
+      { "name": "A Regra do Traço", "body": "Se uma área precisa ser separada, desenhe a linha da quadra. Sombra só existe para o que flutua de fato sobre a página.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar #000 como fundo e separar áreas com o traço de quadra (branco 14%) ou o traço forte (branco 30%).",
+      "Do reservar o neon para agendar, reservar, pagar o sinal, horários, prazo do sinal e números de conquista.",
+      "Do escrever títulos em Archivo largura 62, peso 900, caixa alta, entrelinha 0,88, com as quebras escolhidas no código.",
+      "Do mostrar horários, preços, telefones e códigos em dado (largura 80, peso 650, tabular).",
+      "Do listar coleções em linhas com traço e MarcaX, não em grade de cards.",
+      "Do manter a quadra a 6–14% de branco quando é fundo, e a 22–28% só quando ela é a imagem da Arena.",
+      "Do limitar o movimento a um momento desenhado por página, só com stroke-dashoffset, opacity e transform, e entregar tudo pronto com \"reduzir movimento\".",
+      "Do garantir alvo de toque de 44px e foco de teclado em contorno neon de 2px."
+    ],
+    "donts": [
+      "Don't usar cinza-escuro de fundo, gradiente decorativo ou sombra em quadros, botões e fotos.",
+      "Don't arredondar superfícies; o círculo é só de controle flutuante, ponto de status e o O da linha do tempo.",
+      "Don't pôr rótulo em caixa alta acima de título, palavra colorida dentro do título ou itálico de destaque.",
+      "Don't montar grade de cards iguais com foto de ação e faixa de estatísticas.",
+      "Don't colocar um quadro dentro de outro.",
+      "Don't usar as cores de gráfico fora do painel nem o oliva como se fosse o neon de ação.",
+      "Don't aplicar filtro ou máscara geométrica às fotos do clube.",
+      "Don't terminar link com seta ou glifo; o tracejado já é o deslocamento."
+    ]
+  }
+}

@@ -122,13 +122,14 @@ function ItemLinhaDoTempo({ resultado: r }: { resultado: ResultadoPublico }) {
   const foto = r.fotoId ? fotoPorId(r.fotoId) : undefined;
   return (
     <li className="relative pb-10 pl-7 last:pb-0 sm:pl-10">
-      {/* marcador na linha: cheio para título ou pódio, vazado para campanha */}
-      <span
-        aria-hidden
-        className={`absolute -left-[0.4375rem] top-2 h-3.5 w-3.5 rounded-full border-2 border-branco ${
-          r.titulo ? "bg-branco" : "bg-preto"
-        }`}
-      />
+      {/* peças da prancheta na linha: X (do escudo) para título ou pódio, O para campanha */}
+      <span aria-hidden className="absolute -left-[0.6875rem] top-1 grid h-[1.375rem] w-[1.375rem] place-items-center bg-preto">
+        {r.titulo ? (
+          <MarcaX espessura={2.2} className="h-3.5 w-3.5" />
+        ) : (
+          <span className="h-3.5 w-3.5 rounded-full border-2 border-branco" />
+        )}
+      </span>
       <div className={foto ? "grid gap-6 sm:grid-cols-[1fr_14rem] sm:items-start lg:grid-cols-[1fr_17rem]" : ""}>
         <div>
           <p className="titulo t-3">{r.competicao}</p>

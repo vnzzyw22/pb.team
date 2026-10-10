@@ -23,6 +23,7 @@ export default async function PaginaSemana({ searchParams }: { searchParams: Pro
 
   return (
     <div className="grid gap-8">
+      <h1 className="sr-only">Reservas da semana</h1>
       <NavegacaoPeriodo
         rotulo={`${formatarData(inicio).slice(0, 5)} a ${formatarData(fim)}`}
         anterior={`/painel/semana?inicio=${somarDias(inicio, -7)}`}

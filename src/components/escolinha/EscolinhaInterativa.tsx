@@ -98,7 +98,7 @@ export function EscolinhaInterativa() {
           Categorias e horários
         </h2>
         <p className="lead medida mt-4 text-giz">{frequenciaDosTreinos()}</p>
-        <ul className="mt-10 grid border-l border-t border-linha sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 border-t border-linha">
           {CATEGORIAS.map((c) => (
             <CartaoCategoria key={c.id} categoria={c} marcada={c.id === marcada} onAgendar={() => agendar()} />
           ))}
@@ -128,7 +128,10 @@ function RespostaBusca({
         <p className="text-giz">
           Em {temporada}, quem nasceu em {ano} completa {idadeNoAno} anos e joga no
         </p>
-        <p className="titulo t-1 mt-3">{categoria.nome}</p>
+        <p className="titulo t-1 relative ml-[0.5em] mt-[0.5em] inline-block">
+          <span className="relative block">{categoria.nome}</span>
+          <CirculoMarcador key={`${ano}-${categoria.id}`} />
+        </p>
         <ul className="mt-6 grid gap-4 border-t border-linha pt-5 sm:grid-cols-2">
           {categoria.turmas.map((t) => (
             <li key={t.id}>
@@ -187,17 +190,17 @@ function CartaoCategoria({ categoria, marcada, onAgendar }: { categoria: Categor
   return (
     <li
       id={`categoria-${categoria.id}`}
-      className="relative grid scroll-mt-24 grid-cols-[7.25rem_1fr] gap-x-4 border-b border-r border-linha p-4 sm:block sm:p-6"
+      className="relative grid scroll-mt-24 grid-cols-[7.25rem_1fr] gap-x-4 border-b border-linha py-5 sm:grid-cols-[10rem_1fr] sm:gap-x-8 lg:grid-cols-[11rem_12rem_1fr_auto] lg:items-baseline lg:py-7"
     >
-      <div>
-        <div className="relative inline-block">
-          <h3 className="titulo t-3 relative px-1">{categoria.nome}</h3>
+      <div className="lg:contents">
+        <div className="titulo t-3 relative inline-block w-fit self-start justify-self-start">
+          <h3 className="relative">{categoria.nome}</h3>
           {marcada && <CirculoMarcador />}
         </div>
-        <p className="mt-2 text-sm text-giz sm:text-base">{textoNascidos(categoria)}</p>
+        <p className="mt-2 text-sm text-giz sm:text-base lg:col-start-2 lg:mt-0">{textoNascidos(categoria)}</p>
         {marcada && <span className="sr-only">(categoria do ano buscado)</span>}
       </div>
-      <ul className="grid content-start gap-3 sm:mt-5">
+      <ul className="grid content-start gap-3 lg:col-start-3 lg:flex lg:flex-wrap lg:gap-x-10">
         {categoria.turmas.map((t) => (
           <li key={t.id}>
             {categoria.turmas.length > 1 && <p className="text-sm font-semibold text-giz">{t.nome}</p>}
@@ -212,7 +215,7 @@ function CartaoCategoria({ categoria, marcada, onAgendar }: { categoria: Categor
       <button
         type="button"
         onClick={onAgendar}
-        className="link-jogada col-start-2 mt-3 inline-flex min-h-11 items-center justify-self-start text-[0.9375rem] sm:mt-5"
+        className="link-jogada col-start-2 mt-3 inline-flex min-h-11 items-center justify-self-start text-[0.9375rem] lg:col-start-4 lg:mt-0 lg:self-center"
       >
         Agendar aula<span className="hidden sm:inline">&nbsp;experimental</span>
         <span className="sr-only"> experimental no {categoria.nome}</span>
@@ -221,21 +224,24 @@ function CartaoCategoria({ categoria, marcada, onAgendar }: { categoria: Categor
   );
 }
 
-/** O círculo de marcador que o técnico faz em volta da categoria encontrada. */
+/**
+ * O círculo de marcador que o técnico faz em volta da categoria encontrada.
+ * Medido em em a partir do título que ele envolve: acompanha o tamanho fluido da letra.
+ */
 function CirculoMarcador() {
   return (
     <svg
       viewBox="0 0 200 80"
       preserveAspectRatio="none"
       aria-hidden
-      className="pointer-events-none absolute -left-4 -top-3.5 h-[calc(100%+1.75rem)] w-[calc(100%+2.25rem)] text-branco"
+      className="pointer-events-none absolute left-[-0.55em] top-[-0.45em] h-[calc(100%+0.9em)] w-[calc(100%+1.1em)] text-branco"
       fill="none"
       stroke="currentColor"
       strokeWidth="2.5"
       strokeLinecap="round"
     >
       <path
-        d="M30 52C12 40 26 14 92 10c56-3 98 8 100 30 2 24-48 34-96 33C44 72 8 62 14 40 18 26 44 18 70 15"
+        d="M44 72C14 70 6 56 8 38 10 18 40 8 100 7 160 6 194 14 194 38 194 62 160 74 100 74 66 74 30 70 18 56"
         pathLength={1}
         className="desenhar"
       />

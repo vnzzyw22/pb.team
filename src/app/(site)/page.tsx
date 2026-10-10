@@ -74,11 +74,11 @@ export default function Home() {
               </p>
             </form>
 
-            <ul className="mt-10 grid grid-cols-3 border-l border-t border-linha">
+            <ul className="mt-10 border-t border-linha sm:columns-2 sm:gap-x-10">
               {CATEGORIAS.map((c) => (
-                <li key={c.id} className="border-b border-r border-linha px-3 py-3.5 sm:px-4">
+                <li key={c.id} className="flex break-inside-avoid items-baseline justify-between gap-4 border-b border-linha py-3">
                   <p className="titulo t-4">{c.nome}</p>
-                  <p className="dado mt-1.5 text-[0.8125rem] text-giz sm:text-sm">{faixaDeAnos(c)}</p>
+                  <p className="dado text-sm text-giz">{faixaDeAnos(c)}</p>
                 </li>
               ))}
             </ul>

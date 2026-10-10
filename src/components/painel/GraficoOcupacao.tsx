@@ -2,8 +2,8 @@ import { formatarHoraCurta, type OcupacaoSemana } from "@/lib";
 
 // Validadas com o validador de paleta da skill de dataviz sobre o fundo #000:
 // faixa de luminosidade, croma, separação para daltonismo e contraste.
-const COR_TREINO = "#4a72b8";
-const COR_LIVRE = "#8c9d00";
+const COR_TREINO = "var(--color-grafico-treino)";
+const COR_LIVRE = "var(--color-grafico-livre)";
 
 const horas = (minutos: number) => formatarHoraCurta(Math.round(minutos));
 

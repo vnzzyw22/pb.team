@@ -1,7 +1,7 @@
 import { formatarHora, formatarHoraCurta, type Segmento } from "@/lib";
 
 const ESTILO: Record<Segmento["tipo"], { rotulo: string; bloco: string; marca: string }> = {
-  treino: { rotulo: "Treino", bloco: "bg-[#4a72b8]/20", marca: "bg-[#4a72b8]" },
+  treino: { rotulo: "Treino", bloco: "bg-grafico-treino/20", marca: "bg-grafico-treino" },
   reserva: { rotulo: "Reserva", bloco: "bg-white/10", marca: "bg-branco" },
   bloqueio: { rotulo: "Bloqueio", bloco: "bg-alerta/15", marca: "bg-alerta" },
   livre: { rotulo: "Livre", bloco: "border border-dashed border-linha-forte", marca: "border border-linha-forte" },
