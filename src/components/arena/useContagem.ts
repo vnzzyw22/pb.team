@@ -15,10 +15,12 @@ export function useContagem(ate?: number): number | null {
   return Math.max(0, ate - agora);
 }
 
-/** 754000 → "12:34" */
+/** 754000 → "12:34"; acima de uma hora, 9000000 → "2h30". */
 export function formatarContagem(ms: number): string {
   const total = Math.ceil(ms / 1000);
-  const min = Math.floor(total / 60);
+  const horas = Math.floor(total / 3600);
+  const min = Math.floor((total % 3600) / 60);
   const seg = total % 60;
+  if (horas > 0) return `${horas}h${String(min).padStart(2, "0")}`;
   return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
 }
