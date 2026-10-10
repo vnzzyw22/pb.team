@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CLUBE, formatarTelefone } from "@/lib";
 import { Escudo } from "@/components/Escudo";
-import { Quadra } from "@/components/Quadra";
 import { IconeInstagram, IconeWhatsApp } from "@/components/grafismos";
 import { ITENS_MENU, urlInstagram, whatsappDaArena, whatsappDoClube } from "./navegacao";
 
@@ -9,10 +8,6 @@ export function Rodape() {
   const ano = new Date().getFullYear();
   return (
     <footer className="relative overflow-hidden border-t border-linha bg-preto">
-      <Quadra
-        orientacao="horizontal"
-        className="pointer-events-none absolute -right-[28rem] bottom-[-6rem] hidden h-[30rem] text-white/[0.05] lg:block"
-      />
       <div className="recipiente relative grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Escudo contorno className="h-20 w-20" />
