@@ -11,7 +11,7 @@ export function Rodape() {
       <div className="recipiente relative grid gap-12 py-16 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-4">
           <Escudo contorno className="h-20 w-20" />
-          <p className="titulo mt-6 text-[2.5rem]">{CLUBE.nomeCompleto}</p>
+          <p className="titulo titulo-leve mt-6 text-[2.5rem]">{CLUBE.nomeCompleto}</p>
           <p className="mt-3 text-giz">
             Escolinha de futsal em {CLUBE.cidade}/{CLUBE.estado} desde {CLUBE.fundacao}.
           </p>
