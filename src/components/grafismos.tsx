@@ -28,43 +28,39 @@ export function LinhaDoMeio({ className = "" }: { className?: string }) {
 
 interface SetaJogadaProps {
   className?: string;
-  /** Caminho da seta no viewBox 0 0 320 80; termina onde está a ponta. */
-  d?: string;
-  /** Ponta da seta (posição e ângulo, em graus) no mesmo viewBox. */
-  ponta?: { x: number; y: number; angulo: number };
   animar?: boolean;
+  /** Atraso da animação, ex.: "0.6s". */
   atraso?: string;
 }
 
-/** Seta de jogada desenhada à mão: a linha cheia que leva até a ação. */
-export function SetaJogada({
-  className = "",
-  d = "M300 4C300 46 214 56 108 58S24 66 18 74",
-  ponta = { x: 18, y: 74, angulo: 112 },
-  animar = false,
-  atraso = "0s",
-}: SetaJogadaProps) {
-  const estilo = { "--atraso": atraso } as React.CSSProperties;
+/**
+ * Seta de jogada desenhada à mão: a linha cheia que desce da direita e
+ * aponta para a ação embaixo, à esquerda. Proporção 10:3.
+ */
+export function SetaJogada({ className = "", animar = false, atraso = "0s" }: SetaJogadaProps) {
   return (
     <svg
-      viewBox="0 0 320 80"
+      viewBox="0 0 320 96"
       className={className}
       aria-hidden
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.25"
       strokeLinecap="round"
       strokeLinejoin="round"
-      preserveAspectRatio="none"
     >
-      <path d={d} pathLength={1} className={animar ? "desenhar" : undefined} style={estilo} vectorEffect="non-scaling-stroke" />
       <path
-        d="M-9 -7 0 0 -9 7"
-        transform={`translate(${ponta.x} ${ponta.y}) rotate(${ponta.angulo})`}
+        d="M296 6C300 44 262 62 196 66S64 70 34 88"
         pathLength={1}
         className={animar ? "desenhar" : undefined}
-        style={{ "--atraso": `calc(${atraso} + 0.75s)` } as React.CSSProperties}
-        vectorEffect="non-scaling-stroke"
+        style={{ "--atraso": atraso } as React.CSSProperties}
+      />
+      <path
+        d="M-12 -8 0 0 -12 8"
+        transform="translate(34 88) rotate(149)"
+        pathLength={1}
+        className={animar ? "desenhar" : undefined}
+        style={{ "--atraso": `calc(${atraso} + 0.7s)` } as React.CSSProperties}
       />
     </svg>
   );
